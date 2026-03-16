@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>La Gran Manada 🦁</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink:    #FF6B9D;
+  --pink-l:  #FFD6E7;
+  --pink-ll: #FFF0F5;
+  --orange:  #FF9A3C;
+  --green:   #4CAF82;
+  --green-l: #D4F5E5;
+  --yellow:  #FFD93D;
+  --yellow-l:#FFF8D6;
+  --bg:      #FFF5F8;
+  --card:    #FFFFFF;
+  --text:    #2D1B33;
+  --muted:   #9B7BA8;
+  --border:  #F0D6E8;
+  --shadow:  0 4px 20px rgba(255,107,157,0.15);
+  --shadow-s:0 2px 10px rgba(255,107,157,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SPLASH / LOGIN ─────────────────────────────────────────── */
+#splash {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(160deg, #FF6B9D 0%, #FF9A3C 50%, #FFD93D 100%);
+  position: relative;
+  overflow: hidden;
+}
+#splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.splash-paws {
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.08;
+  animation: float 6s ease-in-out infinite;
+}
+.sp1 { top: 5%; left: -2%; animation-delay: 0s; }
+.sp2 { top: 15%; right: 5%; animation-delay: 1s; font-size: 60px; }
+.sp3 { bottom: 10%; left: 10%; animation-delay: 2s; font-size: 50px; }
+.sp4 { bottom: 20%; right: -2%; animation-delay: 0.5s; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.splash-logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 52px;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  animation: popIn .6s cubic-bezier(.34,1.56,.64,1);
+}
+.splash-animal {
+  font-size: 72px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
+}
+.splash-tagline {
+  color: rgba(255,255,255,0.9);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  background: white;
+  border-radius: 24px;
+  padding: 1.75rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 1;
+  animation: slideUp .5s .2s both cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes slideUp {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.login-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color: var(--pink);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+.field { margin-bottom: 1rem; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.field input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color .2s;
+}
+.field input:focus { border-color: var(--pink); background: white; }
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  color: white;
+  font-family: 'Fredoka One', cursive;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255,107,157,0.4);
+  transition: transform .15s, box-shadow .15s;
+  margin-top: 4px;
+}
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,107,157,0.5); }
+.btn-login:active { transform: scale(0.97); }
+.login-error {
+  background: #FFE5E5;
+  border: 1.5px solid #FFAAAA;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #CC2222;
+  margin-top: 10px;
+  display: none;
+  text-align: center;
+}
+
+/* ── APP SHELL ──────────────────────────────────────────────── */
+#appShell { display: none; min-height: 100vh; padding-bottom: 80px; }
+
+/* TOP BAR */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: white;
+  border-bottom: 2px solid var(--border);
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: var(--shadow-s);
+}
+.topbar-logo {
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
+  color: var(--pink);
+  flex: 1;
+}
+.topbar-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255,107,157,0.3);
+}
+.topbar-rugidos {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--yellow-l);
+  border: 2px solid var(--yellow);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px; font-weight: 800; color: var(--text);
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: white;
+  border-top: 2px solid var(--border);
+  display: flex;
+  box-shadow: 0 -4px 20px rgba(255,107,157,0.1);
+}
+.bnav-btn {
+  flex: 1; padding: 10px 4px 8px;
+  border: none; background: transparent;
+  cursor: pointer; display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  transition: all .15s;
+}
+.bnav-btn .b-icon { font-size: 22px; transition: transform .2s; }
+.bnav-btn .b-lbl { font-size: 10px; font-weight: 800; color: var(--muted); letter-spacing: 0.3px; }
+.bnav-btn.active .b-lbl { color: var(--pink); }
+.bnav-btn.active .b-icon { transform: scale(1.2); }
+
+/* SCREENS */
+.screen { display: none; padding: 16px; }
+.screen.visible { display: block; }
+
+/* ── HOME SCREEN ──────────────────────────────────────────── */
+.profile-hero {
+  background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+  border-radius: 24px;
+  padding: 1.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.profile-hero::after {
+  content: attr(data-animal);
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 80px;
+  opacity: 0.25;
+}
+.ph-rank-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+.ph-name {
+  font-family: 'Fredoka One', cursive;
+  font-size: 32px;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.ph-rank { font-size: 15px; font-weight: 700; opacity: 0.9; margin-bottom: 1rem; }
+.ph-prog-label { font-size: 11px; font-weight: 800; opacity: 0.8; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.ph-prog-track { height: 10px; background: rgba(255,255,255,0.3); border-radius: 5px; overflow: hidden; }
+.ph-prog-fill { height: 100%; background: white; border-radius: 5px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.ph-prog-nums { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; margin-top: 4px; opacity: 0.9; }
+
+/* STAT CARDS */
+.stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.stat-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-s);
+}
+.sc-icon { font-size: 24px; margin-bottom: 4px; }
+.sc-val { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--text); line-height: 1; }
+.sc-lbl { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* SECTION TITLE */
+.sec-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* BADGES MINI */
+.badges-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+.badge-mini {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  border: 3px solid var(--border);
+  background: var(--bg);
+  position: relative;
+  transition: transform .2s;
+}
+.badge-mini.earned {
+  background: linear-gradient(135deg, var(--yellow), var(--orange));
+  border-color: var(--orange);
+  box-shadow: 0 4px 12px rgba(255,154,60,0.4);
+  animation: badgePop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes badgePop {
+  0% { transform: scale(0.5); }
+  100% { transform: scale(1); }
+}
+.badge-mini .locked-overlay {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.badge-mini.earned .locked-overlay { display: none; }
+
+/* BLOQUE PROGRESS */
+.block-cards { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+.block-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-s);
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: transform .15s, box-shadow .15s;
+}
+.block-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.block-card.active-block { border-color: var(--pink); background: var(--pink-ll); }
+.bc-icon { font-size: 28px; flex-shrink: 0; }
+.bc-info { flex: 1; }
+.bc-name { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+.bc-theme { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+.bc-track { height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.bc-fill { height: 100%; border-radius: 4px; transition: width .6s; }
+.bc-pct { font-size: 11px; font-weight: 800; color: var(--muted); margin-top: 3px; }
+
+/* ── CARTOLA SCREEN ──────────────────────────────────────────── */
+.bloque-selector { display: flex; gap: 6px; margin-bottom: 1rem; overflow-x: auto; padding-bottom: 4px; }
+.bloque-tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.bloque-tab.active {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255,107,157,0.35);
+}
+
+.obj-section { margin-bottom: 1.25rem; }
+.obj-sec-header {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--border);
+}
+.obj-dim-pill {
+  font-size: 11px; font-weight: 800;
+  padding: 3px 10px; border-radius: 20px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.obj-dim-pill.tec { background: #E8F0FF; color: #3355CC; }
+.obj-dim-pill.soc { background: var(--green-l); color: #1A7A55; }
+.obj-dim-pill.act { background: var(--yellow-l); color: #8A5C00; }
+.obj-count { font-size: 12px; font-weight: 800; color: var(--muted); margin-left: auto; }
+
+.obj-item-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  margin-bottom: 7px;
+  cursor: pointer;
+  transition: all .2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.obj-item-card:active { transform: scale(0.98); }
+.obj-item-card.done { background: var(--green-l); border-color: var(--green); }
+.obj-item-card.done.tec { background: #E8F0FF; border-color: #3355CC; }
+.obj-item-card.done.act { background: var(--yellow-l); border-color: var(--yellow); }
+.obj-checkbox {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2.5px solid var(--border);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; transition: all .2s; margin-top: 1px;
+  background: white;
+}
+.obj-item-card.done .obj-checkbox {
+  background: var(--green); border-color: var(--green); color: white;
+}
+.obj-item-card.done.tec .obj-checkbox { background: #3355CC; border-color: #3355CC; }
+.obj-item-card.done.act .obj-checkbox { background: var(--orange); border-color: var(--orange); }
+.obj-text { font-size: 13px; font-weight: 600; line-height: 1.5; flex: 1; }
+.obj-rug { font-size: 11px; font-weight: 800; color: var(--muted); flex-shrink: 0; margin-top: 2px; white-space: nowrap; }
+
+/* BADGE unlock banner */
+.badge-unlock-banner {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 2px dashed var(--border);
+  background: var(--bg);
+  margin-bottom: 1rem;
+}
+.bub-icon { font-size: 32px; }
+.bub-info { flex: 1; }
+.bub-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 2px; }
+.bub-name { font-size: 15px; font-weight: 800; }
+.bub-req { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+.bub-lock { font-size: 22px; }
+
+/* ── MANADA (panel monitor) ──────────────────────────────────── */
+.monitor-note {
+  background: linear-gradient(135deg, var(--pink-ll), var(--yellow-l));
+  border: 2px solid var(--pink-l);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* ── CONFETTI ──────────────────────────────────────────────── */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFall 1.2s ease-in forwards;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── LOADING ──────────────────────────────────────────────── */
+#loadingScreen {
+  position: fixed; inset: 0;
+  background: linear-gradient(160deg, #FF6B9D, #FF9A3C);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; z-index: 1000;
+}
+#loadingScreen.hidden { display: none; }
+.loading-animal { font-size: 60px; animation: bounce 0.8s ease-in-out infinite alternate; }
+@keyframes bounce { to { transform: translateY(-15px); } }
+.loading-text { font-family: 'Fredoka One', cursive; font-size: 20px; color: white; }
+
+/* ── TOAST ──────────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--text); color: white;
+  padding: 10px 20px; border-radius: 20px;
+  font-size: 13px; font-weight: 700;
+  opacity: 0; transition: all .3s; z-index: 500;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 380px) {
+  .splash-logo { font-size: 42px; }
+  .ph-name { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loadingScreen">
+  <div class="loading-animal">🦁</div>
+  <div class="loading-text">Cargando la Manada...</div>
+</div>
+
+<!-- SPLASH / LOGIN -->
+<div id="splash">
+  <div class="splash-paws sp1">🐾</div>
+  <div class="splash-paws sp2">🦁</div>
+  <div class="splash-paws sp3">🐆</div>
+  <div class="splash-paws sp4">🦅</div>
+
+  <div class="splash-animal">🦁</div>
+  <div class="splash-logo">La Gran Manada</div>
+  <div class="splash-tagline">"Las que corren juntas llegan más lejos"</div>
+
+  <div class="login-card">
+    <div class="login-title">¡Entra a la Manada!</div>
+    <div class="field">
+      <label>Tu correo</label>
+      <input type="email" id="loginEmail" placeholder="nombre@correo.com" autocomplete="email" />
+    </div>
+    <div class="field">
+      <label>Tu contraseña secreta</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <button class="btn-login" onclick="doLogin()">¡Entrar! 🐾</button>
+    <div class="login-error" id="loginError">❌ Correo o contraseña incorrectos</div>
+  </div>
+</div>
+
+<!-- APP SHELL -->
+<div id="appShell">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">🦁 La Gran Manada</div>
+    <div class="topbar-rugidos">🔊 <span id="topRugidos">0</span></div>
+    <div class="topbar-avatar" id="topAvatar">🐾</div>
+  </div>
+
+  <!-- SCREENS -->
+  <!-- HOME -->
+  <div class="screen visible" id="screen-home">
+    <div class="profile-hero" id="profileHero" data-animal="🦁">
+      <div class="ph-rank-tag" id="phRankTag">Rango 1</div>
+      <div class="ph-name" id="phName">¡Hola, Cría!</div>
+      <div class="ph-rank" id="phRank">🐾 Cría de la Sabana</div>
+      <div class="ph-prog-label">Rugidos de la temporada</div>
+      <div class="ph-prog-track">
+        <div class="ph-prog-fill" id="phProgFill" style="width:0%"></div>
+      </div>
+      <div class="ph-prog-nums">
+        <span id="phProgNums">0 / 480 Rugidos</span>
+        <span id="phProgPct">0%</span>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="sc-icon">🏅</div>
+        <div class="sc-val" id="statBadges">0/6</div>
+        <div class="sc-lbl">Marcas</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-icon">✅</div>
+        <div class="sc-val" id="statObjs">0</div>
+        <div class="sc-lbl">Objetivos</div>
+      </div>
+    </div>
+
+    <div class="sec-title">🏅 Marcas de Instinto</div>
+    <div class="badges-row" id="badgesRow"></div>
+
+    <div class="sec-title">📋 Bloques de la Temporada</div>
+    <div class="block-cards" id="blockCards"></div>
+  </div>
+
+  <!-- CARTOLA -->
+  <div class="screen" id="screen-cartola">
+    <div class="bloque-selector" id="bloqueTabs"></div>
+    <div id="cartolaContent"></div>
+  </div>
+
+  <!-- MANADA (Panel monitor básico) -->
+  <div class="screen" id="screen-manada">
+    <div class="sec-title">🦁 Mi Manada</div>
+    <div class="monitor-note">
+      Este panel es para <strong>el Anciano de la Manada</strong> (la monitora). Aquí podrás ver el resumen del grupo y gestionar las crías. Próximamente disponible con acceso completo.
+    </div>
+    <div id="manadaLogout" style="margin-top:1rem">
+      <div class="sec-title" style="margin-top:1.5rem">⚙️ Mi cuenta</div>
+      <div style="background:white;border-radius:16px;border:2px solid var(--border);padding:14px 16px;margin-bottom:10px;font-size:14px;font-weight:700">
+        <span style="color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px">Sesión activa</span>
+        <span id="userEmailDisplay">—</span>
+      </div>
+      <button onclick="doLogout()" style="width:100%;padding:13px;border-radius:14px;border:2px solid #FFB3B3;background:#FFF0F0;color:#CC2222;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer">
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="bnav-btn active" id="bnav-home" onclick="showScreen('home')">
+      <span class="b-icon">🏠</span>
+      <span class="b-lbl">Inicio</span>
+    </button>
+    <button class="bnav-btn" id="bnav-cartola" onclick="showScreen('cartola')">
+      <span class="b-icon">📋</span>
+      <span class="b-lbl">Cartola</span>
+    </button>
+    <button class="bnav-btn" id="bnav-manada" onclick="showScreen('manada')">
+      <span class="b-icon">🦁</span>
+      <span class="b-lbl">Manada</span>
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ── CONFIG ───────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyDS2uCxJkPHrLe9AiN-hkcVMNLZ7u5xJCA",
+  authDomain: "la-gran-manada.firebaseapp.com",
+  projectId: "la-gran-manada",
+  storageBucket: "la-gran-manada.firebasestorage.app",
+  messagingSenderId: "973285518131",
+  appId: "1:973285518131:web:02fc08f34df9584102ec46"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const auth  = getAuth(fbApp);
+const db    = getFirestore(fbApp);
+
+// ── DATA ─────────────────────────────────────────────────────
+const RANKS = [
+  { name: 'Cría de la Sabana',       icon: '🐾', req: 0   },
+  { name: 'Exploradora del Territorio', icon: '🦊', req: 80  },
+  { name: 'Cazadora en Formación',   icon: '🐆', req: 200 },
+  { name: 'Guardiana del Territorio',icon: '🦁', req: 350 },
+  { name: 'Leyenda de la Gran Manada',icon:'🦅', req: 480 },
+];
+
+const BADGES = [
+  { id:'guepardo', name:'Patas del Guepardo', icon:'🐆', dim:'tec' },
+  { id:'aguila',   name:'Visión del Águila',  icon:'🦅', dim:'tec' },
+  { id:'colmillo', name:'Colmillo Preciso',   icon:'🐊', dim:'tec' },
+  { id:'leon',     name:'Rugido del León',    icon:'🦁', dim:'soc' },
+  { id:'lobo',     name:'Lomo del Lobo',      icon:'🐺', dim:'soc' },
+  { id:'rino',     name:'Corazón de Rinoceronte', icon:'🦏', dim:'act' },
+];
+
+const BLOQUES = [
+  {
+    id:'b1', icon:'🌅', name:'El Despertar de la Cría',
+    theme:'Dominio del balón y primeros contactos',
+    color:'#FF9A3C', badgeId:'guepardo',
+    badgeReq:'5 técnicos + 2 sociales',
+    objs:[
+      {dim:'tec',text:'Controla el balón 5 toques seguidos con pie derecho', rug:10},
+      {dim:'tec',text:'Controla el balón 5 toques seguidos con pie izquierdo', rug:10},
+      {dim:'tec',text:'Ejecuta 3 tipos de conducción: interior, exterior, planta', rug:15},
+      {dim:'tec',text:'Completa el circuito de coordinación en 2 intentos', rug:15},
+      {dim:'tec',text:'Adopta postura básica de espera durante 3 minutos de Cacería', rug:10},
+      {dim:'soc',text:'Se presenta a una compañera nueva en el ritual de apertura', rug:5},
+      {dim:'soc',text:'Participa en la reflexión de cierre con una idea', rug:5},
+      {dim:'soc',text:'Anima verbalmente a una compañera durante la Cacería', rug:5},
+      {dim:'act',text:'Intenta cada ejercicio aunque no lo complete a la primera', rug:8},
+      {dim:'act',text:'Vuelve a intentarlo tras un error sin quejarse', rug:7},
+    ]
+  },
+  {
+    id:'b2', icon:'🌿', name:'La Ley de la Manada',
+    theme:'Pase, comunicación y juego colectivo',
+    color:'#4CAF82', badgeId:'aguila',
+    badgeReq:'4 técnicos + 3 sociales',
+    objs:[
+      {dim:'tec',text:'Completa 10 pases seguidos con una compañera', rug:12},
+      {dim:'tec',text:'Recibe y controla orientando el cuerpo hacia el juego', rug:12},
+      {dim:'tec',text:'Participa en secuencia de 3 pases en movimiento', rug:15},
+      {dim:'tec',text:'Usa señales verbales en 3 acciones distintas', rug:10},
+      {dim:'soc',text:'Lidera una jugada colectiva planificada con su Manada', rug:10},
+      {dim:'soc',text:'Explica a una compañera cómo funciona una Cacería', rug:8},
+      {dim:'soc',text:'Celebra un gol de su Manada de forma colectiva', rug:5},
+      {dim:'soc',text:'Resuelve un conflicto pequeño sin intervención del Anciano', rug:10},
+      {dim:'act',text:'Mantiene concentración toda la fase táctica del ritual', rug:8},
+    ]
+  },
+  {
+    id:'b3', icon:'⚡', name:'La Gran Cacería',
+    theme:'Remate, presión y resiliencia',
+    color:'#FF6B9D', badgeId:'colmillo',
+    badgeReq:'4 técnicos + 2 esfuerzo',
+    objs:[
+      {dim:'tec',text:'Remata al arco con precisión desde 3 posiciones', rug:15},
+      {dim:'tec',text:'Supera a una defensora en conducción directa (2 veces)', rug:15},
+      {dim:'tec',text:'Mantiene el balón bajo presión durante 4 segundos', rug:12},
+      {dim:'tec',text:'Ejecuta un regate definido con eficacia en Cacería', rug:12},
+      {dim:'soc',text:'Se recupera de un error visible y continúa con actitud', rug:10},
+      {dim:'soc',text:'Motiva a su Manada en un momento difícil', rug:10},
+      {dim:'act',text:'Completa una Cacería que había fallado antes', rug:15},
+      {dim:'act',text:'Acepta corrección del Anciano y la aplica al instante', rug:8},
+      {dim:'act',text:'Máximo esfuerzo en los últimos 10 minutos del ritual', rug:10},
+    ]
+  },
+  {
+    id:'b4', icon:'🏆', name:'El Rugido Final',
+    theme:'Táctica, liderazgo y celebración',
+    color:'#9B59B6', badgeId:'leon',
+    badgeReq:'3 técnicos + 3 liderazgo',
+    objs:[
+      {dim:'tec',text:'Ocupa espacios libres correctamente en 3 acciones', rug:12},
+      {dim:'tec',text:'Toma decisiones tácticas con criterio: pasar, conducir, esperar', rug:15},
+      {dim:'tec',text:'Demuestra ante el Anciano una habilidad dominada', rug:15},
+      {dim:'soc',text:'Lidera el calentamiento de un ritual completo', rug:15},
+      {dim:'soc',text:'Comparte un aprendizaje de la temporada con el grupo', rug:10},
+      {dim:'soc',text:'Ayuda a preparar el espacio del ritual proactivamente', rug:5},
+      {dim:'act',text:'Revisa su cartola macro con el Anciano y reconoce su progreso', rug:10},
+      {dim:'act',text:'Nombra un momento en que perseveró ante un obstáculo', rug:10},
+    ]
+  },
+];
+
+// ── STATE ────────────────────────────────────────────────────
+let userData = null;
+let currentUser = null;
+let activeBloque = 'b1';
+
+// ── DEFAULT PROFILE ──────────────────────────────────────────
+function defaultProfile(email) {
+  const objs = {};
+  BLOQUES.forEach(b => { objs[b.id] = {}; });
+  return {
+    email,
+    displayName: email.split('@')[0],
+    rugidos: 0,
+    badges: {},
+    objs,
+    createdAt: Date.now(),
+  };
+}
+
+// ── FIRESTORE ────────────────────────────────────────────────
+async function loadUserData(uid) {
+  const ref = doc(db, 'participantes', uid);
+  const snap = await getDoc(ref);
+  if (snap.exists()) {
+    return snap.data();
+  } else {
+    const profile = defaultProfile(auth.currentUser.email);
+    await setDoc(ref, profile);
+    return profile;
+  }
+}
+
+async function saveUserData() {
+  if (!currentUser || !userData) return;
+  const ref = doc(db, 'participantes', currentUser.uid);
+  await setDoc(ref, userData, { merge: true });
+}
+
+// ── COMPUTED ─────────────────────────────────────────────────
+function getTotalRugidos() {
+  let total = 0;
+  BLOQUES.forEach(b => {
+    b.objs.forEach((o, i) => {
+      if (userData.objs[b.id] && userData.objs[b.id][i]) total += o.rug;
+    });
+  });
+  return total;
+}
+
+function getCurrentRank() {
+  const rug = getTotalRugidos();
+  let rank = RANKS[0];
+  RANKS.forEach(r => { if (rug >= r.req) rank = r; });
+  return rank;
+}
+
+function getBadgeCount() {
+  return Object.values(userData.badges || {}).filter(Boolean).length;
+}
+
+function getTotalObjsDone() {
+  let count = 0;
+  BLOQUES.forEach(b => {
+    Object.values(userData.objs[b.id] || {}).forEach(v => { if(v) count++; });
+  });
+  return count;
+}
+
+function getBloquePct(bloqueId) {
+  const b = BLOQUES.find(x => x.id === bloqueId);
+  if (!b) return 0;
+  const done = Object.values(userData.objs[b.id] || {}).filter(Boolean).length;
+  return Math.round(done / b.objs.length * 100);
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function renderAll() {
+  const rugidos = getTotalRugidos();
+  userData.rugidos = rugidos;
+  const rank = getCurrentRank();
+  const rankIdx = RANKS.indexOf(rank);
+  const nextRank = RANKS[rankIdx + 1];
+  const pct = Math.round(rugidos / 480 * 100);
+
+  // Update topbar
+  document.getElementById('topRugidos').textContent = rugidos;
+
+  // Profile hero
+  document.getElementById('phRankTag').textContent = `Rango ${rankIdx + 1}`;
+  document.getElementById('phName').textContent = `¡Hola, ${userData.displayName}!`;
+  document.getElementById('phRank').textContent = `${rank.icon} ${rank.name}`;
+  document.getElementById('phProgFill').style.width = pct + '%';
+  document.getElementById('phProgNums').textContent = `${rugidos} / 480 Rugidos`;
+  document.getElementById('phProgPct').textContent = pct + '%';
+  document.getElementById('profileHero').setAttribute('data-animal', rank.icon);
+
+  // Stats
+  document.getElementById('statBadges').textContent = `${getBadgeCount()}/6`;
+  document.getElementById('statObjs').textContent = getTotalObjsDone();
+
+  // Badges row
+  const br = document.getElementById('badgesRow');
+  br.innerHTML = BADGES.map(b => {
+    const earned = userData.badges && userData.badges[b.id];
+    return `<div class="badge-mini ${earned ? 'earned' : ''}" title="${b.name}">
+      ${b.icon}
+      ${!earned ? '<div class="locked-overlay">🔒</div>' : ''}
+    </div>`;
+  }).join('');
+
+  // Block cards
+  const bc = document.getElementById('blockCards');
+  bc.innerHTML = BLOQUES.map(b => {
+    const pct = getBloquePct(b.id);
+    const isActive = b.id === activeBloque;
+    return `<div class="block-card ${isActive ? 'active-block' : ''}" onclick="switchBloque('${b.id}')">
+      <span class="bc-icon">${b.icon}</span>
+      <div class="bc-info">
+        <div class="bc-name">${b.name}</div>
+        <div class="bc-theme">${b.theme}</div>
+        <div class="bc-track"><div class="bc-fill" style="width:${pct}%;background:${b.color}"></div></div>
+        <div class="bc-pct">${pct}% completado</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Cartola
+  renderCartola();
+
+  // User email display
+  if (currentUser) document.getElementById('userEmailDisplay').textContent = currentUser.email;
+}
+
+function renderCartola() {
+  // Tabs
+  const tabs = document.getElementById('bloqueTabs');
+  tabs.innerHTML = BLOQUES.map(b =>
+    `<div class="bloque-tab ${b.id === activeBloque ? 'active' : ''}" onclick="switchBloque('${b.id}')">${b.icon} ${b.name.split(' ').slice(0,2).join(' ')}</div>`
+  ).join('');
+
+  const b = BLOQUES.find(x => x.id === activeBloque);
+  const objs = userData.objs[b.id] || {};
+  const dims = { tec: 'Técnico', soc: 'Socio-recreativo', act: 'Esfuerzo y actitud' };
+  const dimOrder = ['tec', 'soc', 'act'];
+
+  let html = `<div class="badge-unlock-banner">
+    <span class="bub-icon">${BADGES.find(x=>x.id===b.badgeId)?.icon || '🏅'}</span>
+    <div class="bub-info">
+      <div class="bub-label">Marca a desbloquear</div>
+      <div class="bub-name">${BADGES.find(x=>x.id===b.badgeId)?.name || ''}</div>
+      <div class="bub-req">Requiere: ${b.badgeReq}</div>
+    </div>
+    <span class="bub-lock">${userData.badges && userData.badges[b.badgeId] ? '🏅' : '🔒'}</span>
+  </div>`;
+
+  dimOrder.forEach(dim => {
+    const items = b.objs.map((o, i) => ({ ...o, idx: i })).filter(o => o.dim === dim);
+    if (!items.length) return;
+    const done = items.filter(o => objs[o.idx]).length;
+    html += `<div class="obj-section">
+      <div class="obj-sec-header">
+        <span class="obj-dim-pill ${dim}">${dims[dim]}</span>
+        <span class="obj-count">${done}/${items.length}</span>
+      </div>`;
+    items.forEach(o => {
+      const isDone = !!objs[o.idx];
+      html += `<div class="obj-item-card ${dim} ${isDone ? 'done' : ''}" onclick="toggleObj('${b.id}',${o.idx},'${dim}')">
+        <div class="obj-checkbox">${isDone ? '✓' : ''}</div>
+        <span class="obj-text">${o.text}</span>
+        <span class="obj-rug">+${o.rug} 🔊</span>
+      </div>`;
+    });
+    html += '</div>';
+  });
+
+  document.getElementById('cartolaContent').innerHTML = html;
+}
+
+// ── INTERACTIONS ─────────────────────────────────────────────
+window.switchBloque = function(id) {
+  activeBloque = id;
+  renderAll();
+  showScreen('cartola');
+};
+
+window.toggleObj = async function(bloqueId, idx, dim) {
+  if (!userData.objs[bloqueId]) userData.objs[bloqueId] = {};
+  const prev = !!userData.objs[bloqueId][idx];
+  userData.objs[bloqueId][idx] = !prev;
+
+  if (!prev) {
+    // earned
+    const b = BLOQUES.find(x => x.id === bloqueId);
+    const rug = b.objs[idx].rug;
+    spawnConfetti();
+    showToast(`+${rug} Rugidos 🔊`);
+    checkBadgeUnlock(bloqueId);
+  }
+
+  renderAll();
+  await saveUserData();
+};
+
+function checkBadgeUnlock(bloqueId) {
+  const b = BLOQUES.find(x => x.id === bloqueId);
+  const objs = userData.objs[bloqueId] || {};
+  const tec = b.objs.map((o,i)=>({...o,i})).filter(o=>o.dim==='tec'&&objs[o.i]).length;
+  const soc = b.objs.map((o,i)=>({...o,i})).filter(o=>o.dim==='soc'&&objs[o.i]).length;
+  const act = b.objs.map((o,i)=>({...o,i})).filter(o=>o.dim==='act'&&objs[o.i]).length;
+
+  // Simple unlock: 3+ tec OR 2+ soc for the associated badge
+  let unlock = false;
+  if (b.id === 'b1' && tec >= 5 && soc >= 2) unlock = true;
+  if (b.id === 'b2' && tec >= 4 && soc >= 3) unlock = true;
+  if (b.id === 'b3' && tec >= 4 && act >= 2) unlock = true;
+  if (b.id === 'b4' && tec >= 3 && soc >= 3) unlock = true;
+
+  if (unlock && !(userData.badges && userData.badges[b.badgeId])) {
+    if (!userData.badges) userData.badges = {};
+    userData.badges[b.badgeId] = true;
+    showToast(`🏅 ¡Nueva Marca desbloqueada: ${BADGES.find(x=>x.id===b.badgeId)?.name}!`);
+    spawnConfetti(40);
+  }
+}
+
+// ── UI HELPERS ───────────────────────────────────────────────
+window.showScreen = function(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+  document.getElementById('screen-' + id).classList.add('visible');
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('bnav-' + id).classList.add('active');
+  if (id === 'cartola') renderCartola();
+};
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function spawnConfetti(count = 20) {
+  const colors = ['#FF6B9D','#FF9A3C','#FFD93D','#4CAF82','#9B59B6','#3498DB'];
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      top:0;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${0.8+Math.random()*0.8}s;
+      animation-delay:${Math.random()*0.3}s;
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1400);
+  }
+}
+
+// ── AUTH ─────────────────────────────────────────────────────
+window.doLogin = async function() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  if (!email || !pass) { errEl.style.display='block'; return; }
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e) {
+    errEl.style.display = 'block';
+  }
+};
+
+window.doLogout = async function() {
+  await signOut(auth);
+};
+
+// ── AUTH STATE ───────────────────────────────────────────────
+onAuthStateChanged(auth, async (user) => {
+  document.getElementById('loadingScreen').classList.add('hidden');
+  if (user) {
+    currentUser = user;
+    userData = await loadUserData(user.uid);
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('appShell').style.display = 'block';
+    renderAll();
+  } else {
+    currentUser = null;
+    userData = null;
+    document.getElementById('splash').style.display = 'flex';
+    document.getElementById('appShell').style.display = 'none';
+  }
+});
+
+// Login on Enter key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('splash').style.display !== 'none') {
+    window.doLogin();
+  }
+});
+</script>
+</body>
+</html>
